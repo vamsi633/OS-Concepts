@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/vamsikrishnanouluri/Documents/os/producer-consumer",
-      "program": "/Users/vamsikrishnanouluri/Documents/os/producer-consumer/build/Debug/outDebug"
+      "cwd": "/Users/vamsikrishnanouluri/Documents/OS-Concepts/dining-philosopher",
+      "program": "/Users/vamsikrishnanouluri/Documents/OS-Concepts/dining-philosopher/build/Debug/outDebug"
     }
   ]
 }
