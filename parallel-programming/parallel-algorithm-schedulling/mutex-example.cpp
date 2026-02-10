@@ -33,6 +33,45 @@ void executeThreadsWithMutexLock(int numThreads){
         std::cout<<"Completed all threads\n";
     }
 }
-int main(int argc, char *argv[]){
 
+void doWorkWithMutexTryLock(int threadIndex){
+    int counter=0;
+    while(!sharedMutex.try_lock()){
+        counter++;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+    std::cout<<"Counter for work for thread "<< threadIndex <<" is "<< counter<<"\n";
+    sharedMutex.unlock();
+}
+
+void executeAndDetachThreadsWithMutexTryLock(int numThreads){
+    std::thread threads[numThreads];
+    std::cout<<"Starting "<<numThreads <<" threads with try_lock on shared mutex\n";
+    
+    //spawn n threads
+    for(int i=0;i<numThreads;++i){
+        threads[i].detach();
+    }
+    std::cout<<"Press a key to let program proceed\n";
+    getchar();
+
+
+}
+int main(int argc, char *argv[]){
+    int numThreads=3;
+    if(argc>1){
+        numThreads=atoi(argv[1]);
+    }
+
+    std::cout << "Pay attention to the fact that newlines will not always be added at the end of lines if multiple <<'s\n";
+	executeThreadsWithMutexLock(numThreads);
+	
+	executeAndDetachThreadsWithMutexTryLock(numThreads);
+
+	std::cout << "Sleeping for 1 second\n";
+	std::this_thread::sleep_for (std::chrono::seconds(1));
+	
+	std::cout << "Press a key to let program proceed\n";
+	getchar();
+	return 0;
 }
